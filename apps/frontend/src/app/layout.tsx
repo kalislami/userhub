@@ -1,10 +1,9 @@
-import EmotionRegistry from '@/components/EmotionRegistry';
-import { Providers } from '@/app/provider';
 import '@/styles/global.css';
+import Main from '@/theme/Main';
 
 export const metadata = {
   title: 'Userhub Web App',
-  description: '...',
+  description: 'User data management',
   icons: {
     icon: '/favicon.ico',
   },
@@ -14,9 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <EmotionRegistry>
-          <Providers>{children}</Providers>
-        </EmotionRegistry>
+        <Main>{children}</Main>
       </body>
     </html>
   );

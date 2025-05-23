@@ -8,8 +8,6 @@ import { createRandomUser, getAllUsers } from '@/apis/userApi'
 import { UserCard } from '@/components/UserCard'
 import { useRouter } from 'next/navigation'
 import { loginSuccess, logout } from '@/store/slices/authSlice'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import EditUserDialog from '@/components/EditUserDialog'
 import { User } from '@shared/types/user'
 
@@ -102,7 +100,6 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
       <Container sx={{ py: 4, minHeight: 'calc(100vh - 132px)' }}>
         <Typography variant="h4" fontWeight="bold" mb={3} textAlign={{ xs: 'center', md: 'left' }}>
           User List
@@ -138,7 +135,6 @@ export default function HomePage() {
           );
         }}
       />
-      <Footer />
     </>
   )
 }

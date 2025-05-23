@@ -1,84 +1,83 @@
-# Turborepo starter
+# TurboRepo Monorepo – Next.js + Express.js
 
-This Turborepo starter is maintained by the Turborepo core team.
+This monorepo is built using [TurboRepo](https://turbo.build/repo) and contains two main applications:
 
-## Using this example
+- `apps/frontend`: Frontend built with [Next.js](https://nextjs.org/)
+- `apps/backend`: Backend built with [Express.js](https://expressjs.com/)
+- `packages/`: (Optional) Shared utilities
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## Technologies Used
 
-## What's inside?
+- Node.js + TypeScript
+- Express.js
+- Next.js
+- Firebase
 
-This Turborepo includes the following packages/apps:
+---
+## Prerequisites
+Before running the App, make sure you have installed the following:
+- [Node.js](https://nodejs.org/)
+- [Firebase CLI](http://firebase.google.com/docs/cli)
+- [TurboRepo CLI (optional)](https://turbo.build/repo/docs/handbook/installing) (if you want to run turbo commands globally)
 
-### Apps and Packages
+## Running the Application
+#### Set up the .env file in the backend folder (refer to env.example for values).
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 1. Development mode
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+#### Using Firebase Cloud
+- Set up the .env file for Firebase Cloud.
+- **Run the following commands:**
+```bash
+npm run dev
+   ```
+#### Using Firebase Emulator (Partially)
+- Set up the .env file for Firebase Emulator.
+- **Run the following commands:**
+```bash
+cd apps/backend
+npm run dev -- with-emulator
 
-### Utilities
+cd apps/frontend
+npm run dev
+   ```
 
-This Turborepo has some additional tools already setup for you:
+### 2. Build Mode
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+#### Using Firebase Cloud
+- Set up the .env file for Firebase Cloud.
+- **Run the following commands:**
+```bash
+npm run build
+npm start
+   ```
 
-### Build
+#### Using Firebase Emulator (Partially)
+- Set up the .env file for Firebase Emulator.
+- **Run the following commands:**
+```bash
+cd apps/backend
+npm run build # skip if already built
+npm start -- with-emulator
 
-To build all apps and packages, run the following command:
+cd apps/frontend
+npm run build # skip if already built
+npm start
+   ```
 
-```
-cd my-turborepo
-pnpm build
-```
+---
 
-### Develop
+## Licence
+#### This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-To develop all apps and packages, run the following command:
+---
 
-```
-cd my-turborepo
-pnpm dev
-```
+## Contributing
+#### Please fork the repo and submit pull requests for contributions.
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## Contact
+#### For questions, contact me at [email](mailto:kamalgoritm@gmail.com).
