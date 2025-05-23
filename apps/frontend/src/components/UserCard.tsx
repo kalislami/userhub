@@ -1,5 +1,8 @@
+'use client';
+
 import { Card, CardContent, Typography, Box, Button, CardActions } from '@mui/material';
 import { User } from '@shared/types/user';
+import { useEffect, useState } from 'react';
 
 export function UserCard({
     user,
@@ -8,13 +11,18 @@ export function UserCard({
     user: User;
     onEdit: (user: User) => void;
 }) {
-    const formattedDate = user.recentlyActive
-        ? new Date(
-            user.recentlyActive < 1e12
-                ? user.recentlyActive * 1000
-                : user.recentlyActive
-        ).toLocaleDateString()
-        : 'N/A';
+    const [formattedDate, setFormattedDate] = useState('N/A');
+
+    useEffect(() => {
+        if (user.recentlyActive) {
+            const date = new Date(
+                user.recentlyActive < 1e12
+                    ? user.recentlyActive * 1000
+                    : user.recentlyActive
+            );
+            setFormattedDate(date.toLocaleDateString());
+        }
+    }, [user.recentlyActive]);
 
     return (
         <Card

@@ -24,7 +24,7 @@ async function start() {
       runCommand('npx', ['firebase', 'emulators:start'], 'Firebase Emulator');
     }
 
-    await runCommand('npm', ['run', 'build'], 'Build');
+    // await runCommand('npm', ['run', 'build'], 'Build');
     await runCommand('npm', ['run', 'start:default'], 'Backend');
   } catch (error) {
     console.error('[Start Script] Error:', error.message);
