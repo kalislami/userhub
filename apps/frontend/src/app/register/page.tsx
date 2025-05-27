@@ -4,38 +4,46 @@ import { useEffect, useState } from 'react';
 import { TextField, Button, Typography, Box, CircularProgress, AlertColor } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import Link from "next/link";
 import { AppDispatch, RootState } from '@/store';
 import { loginStart, loginFailure } from '@/store/slices/authSlice';
 import { errorMsg } from '@/lib/error-handler';
-import { userLogin } from '@/lib/firebase';
+import { userRegister } from '@/lib/firebase';
 import AlertSnackbar from '@/components/AlertSnackbar';
 
-export default function LoginPage() {
+export default function RegisterPage() {
     const dispatch = useDispatch<AppDispatch>();
     const { loading, token, uid } = useSelector((state: RootState) => state.auth);
 
-    const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState<AlertColor>('success');
-    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const router = useRouter();
-    const handleLogin = async () => {
+    const handleRegister = async () => {
+        if (password !== passwordConfirm) {
+            setAlertMessage('password not match');
+            setAlertType('error')
+            setOpenSnackbar(true)
+            return;
+        }
+
         dispatch(loginStart());
+
         try {
-            await userLogin(email, password);
-            setAlertMessage('Login success');
-            setAlertType('success');
-            setOpenSnackbar(true);
-            router.push('/');
+            await userRegister(email, password, name);
+            setAlertMessage('register success');
+            setAlertType('success')
+            setOpenSnackbar(true)
         } catch (err: unknown) {
-            const message = errorMsg(err, 'Login failed');
+            const message = errorMsg(err, 'Register failed');
             setAlertMessage(message);
-            setAlertType('error');
-            setOpenSnackbar(true);
+            setAlertType('error')
+            setOpenSnackbar(true)
             dispatch(loginFailure(message));
         }
     };
@@ -49,21 +57,22 @@ export default function LoginPage() {
         checkAuth();
     }, [router, token, uid])
 
-    return (isCheckingAuth ? (
-        <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            height="100vh"
-        >
-            <CircularProgress />
-        </Box>
-    ) :
+    return (isCheckingAuth ?
+        (
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="100vh"
+            >
+                <CircularProgress />
+            </Box>
+        ) :
         <Box
             component="form"
             onSubmit={e => {
                 e.preventDefault();
-                handleLogin();
+                handleRegister();
             }}
             display="flex"
             flexDirection="column"
@@ -75,7 +84,14 @@ export default function LoginPage() {
             border="1px solid #ccc"
             borderRadius={2}
         >
-            <Typography variant="h5">Login</Typography>
+            <Typography variant="h5">Register</Typography>
+            <TextField
+                label="Name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                autoComplete="full name"
+                fullWidth
+            />
             <TextField
                 label="Email"
                 value={email}
@@ -92,21 +108,23 @@ export default function LoginPage() {
                 fullWidth
             />
 
+            <TextField
+                label="Confirm Password"
+                type="password"
+                value={passwordConfirm}
+                onChange={e => setPasswordConfirm(e.target.value)}
+                autoComplete="current-password"
+                fullWidth
+            />
+
             <Button
                 type="submit"
                 variant="contained"
                 color="primary"
                 disabled={loading}
             >
-                {loading ? <CircularProgress size={24} /> : 'Login'}
+                {loading ? <CircularProgress size={24} /> : 'Register'}
             </Button>
-
-            <Typography variant="body2" align="center">
-                Belum punya akun?{' '}
-                <Link href="/register" style={{ color: '#1976d2', textDecoration: 'none' }}>
-                    Daftar di sini
-                </Link>
-            </Typography>
 
             <AlertSnackbar
                 open={openSnackbar}

@@ -1,6 +1,6 @@
 import { Response, NextFunction } from "express";
 import admin from "firebase-admin";
-import { AuthenticatedRequest } from "../types";
+import { AuthenticatedRequest } from "../types/auth";
 
 export const authMiddleware = async (
     req: AuthenticatedRequest,

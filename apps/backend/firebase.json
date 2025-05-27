@@ -6,8 +6,15 @@
     "firestore": {
       "port": 8081
     },
+    "database": {
+      "port": 9001
+    },
     "ui": {
       "enabled": true
     }
+  },
+  "emulator": {
+    "exportOnExit": true,
+    "import": "./emulator-data"
   }
 }

@@ -1,6 +1,15 @@
+'use client'
+
 import { Box, Typography, Container } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 export default function Footer() {
+    const [year, setYear] = useState(2025)
+
+    useEffect(() => {
+        setYear(new Date().getFullYear())
+    }, [])
+
     return (
         <Box
             component="footer"
@@ -15,7 +24,7 @@ export default function Footer() {
         >
             <Container maxWidth="sm">
                 <Typography variant="body2" color="text.secondary">
-                    © {new Date().getFullYear()} UserHub. All rights reserved.
+                    © {year ?? '2025'} UserHub. All rights reserved.
                 </Typography>
             </Container>
         </Box>

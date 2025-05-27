@@ -41,16 +41,16 @@ export default function EditUserDialog({
 
     useEffect(() => {
         if (user) {
-            setName(user.name);
-            setRatings(user.totalAverageWeightRatings);
-            setRents(user.numberOfRents);
+            setName(user.name ?? '');
+            setRatings(user.totalAverageWeightRatings ?? 0);
+            setRents(user.numberOfRents ?? 0);
         }
     }, [user]);
 
     const handleSave = async () => {
         setSaving(true);
         try {
-            if (!token || user === null) {
+            if (!token || !user?.uid) {
                 onClose();
                 return;
             }

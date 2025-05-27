@@ -1,16 +1,10 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, Button, CardActions } from '@mui/material';
+import { Card, CardContent, Typography, Box } from '@mui/material';
 import { User } from '@shared/types/user';
 import { useEffect, useState } from 'react';
 
-export function UserCard({
-    user,
-    onEdit,
-}: {
-    user: User;
-    onEdit: (user: User) => void;
-}) {
+export function UserCard({user}: {user: User;}) {
     const [formattedDate, setFormattedDate] = useState('N/A');
 
     useEffect(() => {
@@ -41,12 +35,16 @@ export function UserCard({
                     {user.name}
                 </Typography>
 
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                    {user.email}
+                </Typography>
+
                 <Box mb={1}>
                     <Typography variant="body2" color="text.secondary">
                         Total Average Weight Ratings:
                     </Typography>
                     <Typography variant="body1">
-                        {user.totalAverageWeightRatings}
+                        {user.totalAverageWeightRatings ?? 'N/A'}
                     </Typography>
                 </Box>
 
@@ -54,7 +52,14 @@ export function UserCard({
                     <Typography variant="body2" color="text.secondary">
                         Number of Rents:
                     </Typography>
-                    <Typography variant="body1">{user.numberOfRents}</Typography>
+                    <Typography variant="body1">{user.numberOfRents ?? 'N/A'}</Typography>
+                </Box>
+
+                <Box mb={1}>
+                    <Typography variant="body2" color="text.secondary">
+                        Status:
+                    </Typography>
+                    <Typography variant="body1">{user.status}</Typography>
                 </Box>
 
                 <Box>
@@ -66,12 +71,6 @@ export function UserCard({
                     </Typography>
                 </Box>
             </CardContent>
-
-            <CardActions>
-                <Button size="small" onClick={() => onEdit(user)}>
-                    Edit
-                </Button>
-            </CardActions>
         </Card>
     );
 }
