@@ -3,13 +3,14 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
-    "start": "turbo run start",
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "start": "concurrently \"npm run start --workspace=frontend\" \"npm run start --workspace=backend\"",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "prettier": "^3.5.3",
     "turbo": "^2.5.3",
     "typescript": "5.8.2"

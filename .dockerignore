@@ -1,0 +1,22 @@
+# Umum
+node_modules
+dist
+.build
+.next
+out
+.vscode
+.idea
+.DS_Store
+*.log
+
+# Turbo
+turbo
+.cache
+*.tsbuildinfo
+
+# Git
+.git
+.gitignore
+
+# Sistem
+.env*
